@@ -6,7 +6,11 @@ from constants import (
     ASTEROID_KINDS,
     ASTEROID_SPAWN_RATE,
     ASTEROID_MAX_RADIUS,
+    PLAYER_RADIUS,
 )
+from circleshape import CircleShape
+from player import Player
+
 
 def main():
     print("Starting Asteroids!")
@@ -16,6 +20,10 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
+    player = Player(
+        x=SCREEN_WIDTH / 2, 
+        y=SCREEN_HEIGHT / 2,
+    )
 
     running = True
     while running:
@@ -23,7 +31,10 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        screen.fill((0, 0, 0))
+        BLACK = (0, 0, 0)
+        screen.fill(BLACK)
+        player.draw(screen=screen)
+
         pygame.display.flip()
         conversion_factor_milliseconds_to_seconds = 1 / 1000
         seconds_since_last_tick = clock.tick(60) * conversion_factor_milliseconds_to_seconds
