@@ -33,6 +33,7 @@ def main():
 
         BLACK = (0, 0, 0)
         screen.fill(BLACK)
+        player.update(dt)
         player.draw(screen=screen)
 
         pygame.display.flip()
