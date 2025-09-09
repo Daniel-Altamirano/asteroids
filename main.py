@@ -48,6 +48,14 @@ def main():
             item.draw(screen=screen)
 
         pygame.display.flip()
+
+        for asteroid in asteroids:
+            player_collided_with_asteroid = asteroid.collision_check(player)
+            if player_collided_with_asteroid:
+                print("Game over!")
+                return
+
+
         MS_TO_SECONDS = 1 / 1000
         time_since_last_tick_seconds = clock.tick(60) * MS_TO_SECONDS
         dt = time_since_last_tick_seconds
