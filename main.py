@@ -1,3 +1,4 @@
+import sys
 import pygame
 from constants import (
     SCREEN_WIDTH,
@@ -8,7 +9,6 @@ from constants import (
     ASTEROID_MAX_RADIUS,
     PLAYER_RADIUS,
 )
-from circleshape import CircleShape
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
@@ -55,10 +55,14 @@ def main():
         pygame.display.flip()
 
         for asteroid in asteroids:
-            player_collided_with_asteroid = asteroid.collision_check(player)
-            if player_collided_with_asteroid:
+            if asteroid.collides_with(player):
                 print("Game over!")
-                return
+                sys.exit()
+            
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    shot.kill()
+                    asteroid.kill()
 
 
         MS_TO_SECONDS = 1 / 1000
